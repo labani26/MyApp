@@ -11,6 +11,7 @@ const updateUserDetails = async (req, res) => {
     //split(" ")[1]: This splits the header by a space and extracts the second part (i.e., the actual token). If the header is not provided or in the wrong format, token will be undefined.
 
     if(!token){
+        console.log("token not found");
         return res.status(401).json({ error: "No token found, please login first" })
     }
 

@@ -1,15 +1,15 @@
 const Cart = require("../../models/Customer/AddToCartSchema"); // Import the Cart model
 const { validationResult } = require('express-validator');
 const jwt = require("jsonwebtoken");
-const SECRET_KEY = "MyApp";
+const CUSTOMER_SECRET_KEY = "MyApp";
 
 
 //Helper function to decode JWT and extract customer ID
 const getCustomerIdFromToken = (token) => {  //This function, getCustomerIdFromToken, is used to extract the customer ID from a JWT
   try {
-    const decode = jwt.verify(token, SECRET_KEY); //This line uses the jwt.verify() method from the jsonwebtoken library to decode and verify the JWT.
+    const decode = jwt.verify(token, CUSTOMER_SECRET_KEY); //This line uses the jwt.verify() method from the jsonwebtoken library to decode and verify the JWT.
                                                   //token: This is the JWT passed to the function.
-                                                 //SECRET_KEY: This is a secret key that the jwt.verify() function uses to verify the authenticity of the token (it should match the key that was used to sign the JWT).
+                                                 //CUSTOMER_SECRET_KEY: This is a secret key that the jwt.verify() function uses to verify the authenticity of the token (it should match the key that was used to sign the JWT).
     return decode.id; //It returns the value of decode.id, which represents the customer ID from the decoded JWT.
   } catch(error) {
     return null

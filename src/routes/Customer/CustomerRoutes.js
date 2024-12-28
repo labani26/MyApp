@@ -9,7 +9,7 @@ customerRouter.post("/signup", signup);
  
 customerRouter.post("/signin", signin);
 
-customerRouter.post("/updateUserDetails",isAuthenticated, updateUserDetails);
+customerRouter.patch("/updateUserDetails",isAuthenticated, updateUserDetails);
 
 customerRouter.get("/getCustomerDetails", isAuthenticated, getCustomerDetails);
 

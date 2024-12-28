@@ -9,7 +9,7 @@ const fetchAllOrder = async (req,res) => {
     try {
         const result = await Order.find({}, { _v:0 });
 
-        res.send(result);
+        res.send("fetch order successfully",result);
         
     } catch(error){
         console.log(error)

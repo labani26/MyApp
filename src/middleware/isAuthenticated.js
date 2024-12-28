@@ -1,17 +1,18 @@
 const jwt = require("jsonwebtoken");
 const SECRET_KEY = "MyApp"; // Use your secret key
 
-
 // In-memory blacklist for tokens
 const blacklist = new Set();
 
 const isAuthenticated = (req, res, next) => {
 
     // Extract token from Authorization header, expecting format: "Bearer <token>"
+    console.log(req.headers.authorization);
     const token = req.headers.authorization?.split(" ")[1]; 
+    console.log(token);
 
     if(!token){
-        return res.status(401).json({ error: "No token provided, please log in" })
+        return res.status(401).json({ error: "No token provided, please log in" });
     }
 
     // Check if the token is blacklisted
@@ -39,7 +40,6 @@ const isAuthenticated = (req, res, next) => {
         return res.status(403).json({ error: "Invalid token. Please log in again." });
     }
 };
-
 
 // Expose the blacklist for use in the logout function
 module.exports = { isAuthenticated, blacklist }; 

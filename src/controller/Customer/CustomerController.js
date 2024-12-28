@@ -8,6 +8,7 @@ const CUSTOMER_SECRET_KEY = process.env.CUSTOMER_SECRET_KEY || "MyApp";
 
 const signup = async (req,res) => {
     const { name, email, phone, password } = req.body; 
+    console.log(req.body)
 
 
 if (!name || !email || !phone || !password ){
@@ -22,7 +23,7 @@ try {
     }
 
     //Hash the password
-    const hashedPassword = await bcrypt.hash(password,10)
+    const hashedPassword = await bcrypt.hash(password, 10)
 
     //create new password
     const newUser = new Customer({
@@ -82,7 +83,7 @@ const signin = async (req,res) => {
             email: existingUser.email,
             phone: existingUser.phone
         },
-        token })
+        token: token })
 
  } catch(error) {
     console.log(error);

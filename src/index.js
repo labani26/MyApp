@@ -8,7 +8,9 @@ const cors = require("cors");
 // Middleware to parse incoming JSON payload
 const passport = require("passport");
 const session = require("express-session");
-require('./passportConfig');
+require('../passportConfig');
+// const { body, validationResult } = require('express-validator');
+
 
 
 
