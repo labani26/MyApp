@@ -1,7 +1,8 @@
 const Cart = require("../../models/Customer/AddToCartSchema"); // Import the Cart model
 const { validationResult } = require('express-validator');
 const jwt = require("jsonwebtoken");
-const CUSTOMER_SECRET_KEY = "MyApp";
+
+const CUSTOMER_SECRET_KEY = process.env.CUSTOMER_SECRET_KEY || "MyApp";
 
 
 //Helper function to decode JWT and extract customer ID
@@ -21,7 +22,7 @@ const getCustomerIdFromToken = (token) => {  //This function, getCustomerIdFromT
 const addToCart = async (req, res) => {
     const { productId } = req.body;
 
-    const token = req.headers.authorization?.split(" ")[1];
+    const token = req.header('Authorization')?.replace('Bearer','');
      
     const customerId = getCustomerIdFromToken(token);
     if(!customerId){
@@ -58,7 +59,7 @@ const addToCart = async (req, res) => {
 
 //Get all cart for the logged-in user
 const getCustomerCarts = async( req,res ) => {
-    const token = req.headers.authorization?.split(" ")[1];
+    const token = req.header('Authorization')?.replace('Bearer','');
     const customerId = getCustomerIdFromToken(token);
 
     if(!customerId) {
@@ -77,7 +78,7 @@ const getCustomerCarts = async( req,res ) => {
 //Remove an item from the cart
 const removeFromCart = async ( req, res ) => {
     const { cartItemId } = req.params; // Expecting the cart item ID in the URL
-    const token = req.headers.authorization?.split(" ")[1];
+    const token = req.header('Authorization')?.replace('Bearer','');
     const customerId = getCustomerIdFromToken(token);
 
     if(!customerId) {

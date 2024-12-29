@@ -99,7 +99,7 @@ mongoose.connect(process.env.MONGO_URL)
     .then(() => {
         // Start the server only after the DB connection is successful
         app.listen(5000, '0.0.0.0', () => {
-            console.log("Server started on port no" + PORT );
+            console.log("Server started on port no:" + PORT );
         });
     })
     .catch((error) => {

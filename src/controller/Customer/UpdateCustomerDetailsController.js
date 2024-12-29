@@ -5,7 +5,7 @@ const CUSTOMER_SECRET_KEY = "MyApp";
 
 const updateUserDetails = async (req, res) => {
     //Extract the token from the Authorization header
-    const token = req.headers.authorization?.split(" ")[1]; //is used to extract a JWT token from the Authorization header of an incoming HTTP request.
+    const token = req.header('Authorization')?.replace('Bearer',''); //is used to extract a JWT token from the Authorization header of an incoming HTTP request.
     
     //req.headers.authorization: This accesses the Authorization header from the incoming request. It usually contains the JWT token in the format Bearer <token>.
     //split(" ")[1]: This splits the header by a space and extracts the second part (i.e., the actual token). If the header is not provided or in the wrong format, token will be undefined.
@@ -17,7 +17,7 @@ const updateUserDetails = async (req, res) => {
 
     try{
         //Verify the token and extract the user ID
-        const decode = jwt.verify(token, CUSTOMER_SECRET_KEY);  //This verifies and decodes the JWT token using the SECRET_KEY. If the token is valid, it returns the decoded data.
+        const decode = jwt.verify(token, process.env.CUSTOMER_SECRET_KEY);  //This verifies and decodes the JWT token using the SECRET_KEY. If the token is valid, it returns the decoded data.
         const customerId = decode.id; // Get user ID from the token
 
         //Destructure the address from the request body

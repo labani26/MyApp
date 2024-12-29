@@ -43,8 +43,9 @@ try {
     //respond with the created user and token
     res.status(201).json({ message: "User registrered successfully", user: newUser, token });
 } catch (error) {
-    console.log(error);
+    
     res.status(500).json({ message: "Internal server error"});
+    console.log(error);
 
 }
 };

@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const SECRET_KEY = "MyApp"; // Use your secret key
+const CUSTOMER_SECRET_KEY = "MyApp"; // Use your secret key
 
 // In-memory blacklist for tokens
 const blacklist = new Set();
@@ -8,7 +8,7 @@ const isAuthenticated = (req, res, next) => {
 
     // Extract token from Authorization header, expecting format: "Bearer <token>"
     console.log(req.headers.authorization);
-    const token = req.headers.authorization?.split(" ")[1]; 
+    const token = req.header('Authorization')?.replace('Bearer','');; 
     console.log(token);
 
     if(!token){
@@ -22,7 +22,7 @@ const isAuthenticated = (req, res, next) => {
 
     try {
         // Verify token using the secret key (this will also check the signature and expiration)
-        const decoded = jwt.verify(token, SECRET_KEY);
+        const decoded = jwt.verify(token, process.env.CUSTOMER_SECRET_KEY);
 
         // Attach decoded user data to the request object for further use
         req.user = decoded; 
