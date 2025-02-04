@@ -3,17 +3,19 @@ const Customer = require("../../models/Customer/customerSchema");
 const getCustomerDetails = async (req,res) => {
     try {
         // Fetch the customer's ID from the token data (already attached by the middleware)
-        const customerId = req.customer.id;
+        const customerEmail = req.user.email;
+        console.log("details fetched for: " +customerEmail)
 
         //Find the customer in the database
-        const customer = await Customer.findById(customerId);
+        const customer = await Customer.findOne({
+            "email" : customerEmail
+        });
 
         if(!customer){
             return res.status(404).json({ message: "User not found"});
         }
 
         res.status(200).json({
-            id: customer._id,
             name: customer.name,
             email: customer.email,
             phone: customer.phone,

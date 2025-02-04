@@ -26,6 +26,7 @@ const isAuthenticated = (req, res, next) => {
 
         // Attach decoded user data to the request object for further use
         req.user = decoded; 
+        console.log(req.user.id+ " Is authenticated now. Whose maail is: "+req.user.email)
 
         // Proceed to the next middleware or route handler
         next();
