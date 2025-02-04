@@ -74,7 +74,7 @@ const signin = async (req,res) => {
 
     //generate jwt token
     const token = jwt.sign(
-        { id: existingUser._id, email: existingUser.email, phone: existingUser.phone }, CUSTOMER_SECRET_KEY,
+        { id: existingUser._id, email: existingUser.email, phone: existingUser.phone }, process.env.CUSTOMER_SECRET_KEY,
         { expiresIn: "1h"}
         );
 
