@@ -92,13 +92,13 @@ app.use("/customer", getmyorderRouter );
 app.use("/customer", orderRouter );
 app.use("/customer", cancelorderRouter);
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3000;
 
 // Connect to MongoDB and start the server
 mongoose.connect(process.env.MONGO_URL)
     .then(() => {
         // Start the server only after the DB connection is successful
-        app.listen(5000, '0.0.0.0', () => {
+        app.listen(PORT, '0.0.0.0', () => {
             console.log("Server started on port no:" + PORT );
         });
     })
